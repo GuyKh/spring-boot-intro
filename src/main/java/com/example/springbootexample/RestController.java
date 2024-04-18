@@ -2,6 +2,7 @@ package com.example.springbootexample;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,18 +11,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RestController {
 
   @Autowired
-  private MyService myService;
+  private WordCountService wordCountService;
 
 
-  @RequestMapping(method = RequestMethod.GET, path = "/api/get")
-  public ResponseEntity<String> getExample() {
-    return ResponseEntity.ok("alive");
+  @RequestMapping(method = RequestMethod.GET, path = "/words/{word}")
+  public ResponseEntity<String> getWord(@PathVariable("word") String word) {
+    return ResponseEntity.ok("wordCount: " + wordCountService.getWordCount(word));
   }
 
-  @RequestMapping(method = RequestMethod.POST, path = "/api/post")
-  public PostResponse postExample(@RequestBody PostRequest request) {
+  @RequestMapping(method = RequestMethod.GET, path = "/test")
+  public ResponseEntity<String> getTest() {
+    return ResponseEntity.ok("test hi Yarin, and Stephanie Te-st");
+  }
+
+  @RequestMapping(method = RequestMethod.POST, path = "/words/")
+  public ResponseEntity<String> postExample(@RequestBody PostRequest request) {
+
+    // Call word counter
+    wordCountService.countWords(request.getUrl());
 
     // Return the response from my service
-    return myService.createPostResponse(request);
+    return ResponseEntity.ok("Done");
   }
 }

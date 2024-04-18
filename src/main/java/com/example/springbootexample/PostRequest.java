@@ -1,19 +1,19 @@
 package com.example.springbootexample;
 
 public class PostRequest {
-    private String data;
+    private String url;
 
     // Getters and setters
-    public String getData() {
-        return data;
+    public String getUrl() {
+        return url;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
     public String toString() {
-        return "Request{" + "data='" + data + '\'' + '}';
+        return "Request{" + "url='" + url + '\'' + '}';
     }
 }

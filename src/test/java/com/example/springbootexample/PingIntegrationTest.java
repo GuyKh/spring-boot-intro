@@ -34,7 +34,7 @@ public class PingIntegrationTest {
   @Test
   public void testPostEndpoint() throws Exception {
     PostRequest request = new PostRequest();
-    request.setData("ExampleData");
+    request.setUrl("ExampleData");
 
     String jsonResponse = mvc
             .perform(post("/api/post")
@@ -45,7 +45,7 @@ public class PingIntegrationTest {
     PostResponse response = gson.fromJson(jsonResponse, PostResponse.class);
 
     PostResponse expectedResponse = new PostResponse();
-    expectedResponse.setMessage("Received POST request with data: " + request.getData());
+    expectedResponse.setMessage("Received POST request with data: " + request.getUrl());
     assertEquals(expectedResponse, response);
   }
 }
